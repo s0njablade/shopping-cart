@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/Header'
 import CartItems from './components/CartItems'
 import Footer from './components/Footer'
+import AddItem from './components/AddItem'
 
 var inventory = [
   { id: 40, name: 'Mediocre Iron Watch', priceInCents: 399 },
@@ -21,7 +22,8 @@ class App extends Component {
     super();
     this.state = {
       copyrightYear: 2016,
-      inventory: inventory
+      inventory: inventory,
+
       
     }
   }
@@ -36,6 +38,7 @@ class App extends Component {
       <div className="App">
           <Header />
           <CartItems cartItems={cartItems}/>
+          <AddItem inventory={this.state.inventory} />
           <Footer copyrightYear={this.state.copyrightYear}/>
       </div>
     )
