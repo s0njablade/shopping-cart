@@ -4,12 +4,10 @@ import CartItem from './CartItem'
 class CartItems extends Component {
 
     render() {
-        const inventory = []
-        for (let i = 0; i < this.props.cartItems.length;i++){
-            inventory.push(<CartItem item={this.props.cartItems[i]}/>)
-        }
-
-
+        // const inventory = []
+        // for (let i = 0; i < this.props.cartItems.length;i++){
+        //     inventory.push(<CartItem key= {i}item={this.props.cartItems[i]}/>)
+        // }
 
         return (
             <div>
@@ -23,7 +21,11 @@ class CartItems extends Component {
                             <div className="col-md-2">Quantity</div>
                         </div>
                     </div>
-                    {inventory}
+                    {this.props.cartItems.map(item => <CartItem 
+                    name={item.product.name} 
+                    price={((item.product.priceInCents)/100).toFixed(2)}
+                    quantity={item.quantity} 
+                    />)}
                 </div>
             </div>
             </div>

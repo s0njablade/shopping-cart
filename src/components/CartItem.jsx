@@ -6,9 +6,9 @@ class CartItem extends Component {
         return (
             <div className="collection-item">
                 <div className="row">
-                    <div className="col-md-8">{this.props.item.product.name}</div>
-                    <div className="col-md-2">{this.props.item.product.priceInCents}</div>
-                    <div className="col-md-2">{this.props.item.quantity}</div>
+                    <div className="col-md-8">{this.props.name}</div>
+                    <div className="col-md-2">$ {this.props.price}</div>
+                    <div className="col-md-2">x {this.props.quantity}</div>
                 </div>
             </div>
         )

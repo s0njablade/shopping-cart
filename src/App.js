@@ -23,22 +23,53 @@ class App extends Component {
     this.state = {
       copyrightYear: 2016,
       inventory: inventory,
-
-      
+      namePrice:'',
+      quantity: 0, 
+      cart:[], 
+      total: 0
     }
   }
 
+
+grabItem = (e) => {
+  this.setState({[e.target.name]: e.target.value});
+  
+}
+
+submitButton = (e) => {
+  e.preventDefault()
+  const namePrice = this.state.namePrice
+  const quantity = this.state.quantity
+  const items = this.state.inventory
+  let filtered = items.filter (item => item.name === namePrice)
+  let newItem =  {
+    product: {
+      id: filtered[0].id,
+      name: filtered[0].name,
+      priceInCents: filtered[0].priceInCents
+    },
+    quantity: quantity
+  }
+  let cart = this.state.cart 
+  this.setState({cart:[...cart, newItem]})
+  
+let total = this.state.total
+
+let amountAddedToCart = (((newItem.product.priceInCents)/100).toFixed(2)*this.state.quantity)
+this.setState({total: (total+amountAddedToCart)})
+
+}
+
+
   render() {
-    const cartItems = [
-      { id: 1, product: { id: 40, name: 'Mediocre Iron Watch', priceInCents: 399 }, quantity: 1 },
-      { id: 2, product: { id: 41, name: 'Heavy Duty Concrete Plate', priceInCents: 499 }, quantity: 2 },
-      { id: 3, product: { id: 42, name: 'Intelligent Paper Knife', priceInCents: 1999 }, quantity: 1 },
-    ]
+    
+    console.log(this.state.cart)
+
     return (
       <div className="App">
           <Header />
-          <CartItems cartItems={cartItems}/>
-          <AddItem inventory={this.state.inventory} />
+          <CartItems cartItems={this.state.cart}/>
+          <AddItem inventory={this.state.inventory} grabItem={this.grabItem} submitButton={this.submitButton} total={this.state.total}/>
           <Footer copyrightYear={this.state.copyrightYear}/>
       </div>
     )
